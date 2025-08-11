@@ -27,9 +27,10 @@ const ifEmailExists = async (email) => {
 
 const createUser = async (name, email, password) => {
   const id = generateUUID();
+  const normalizedEmail = email.trim().toLowerCase();
   const user = await db.query(
     `INSERT INTO users(id, name, email, password) VALUES (?,?,?,?)`,
-    [id, name, email, password]
+    [id, name, normalizedEmail, password]
   );
 
   return user;
